@@ -68,21 +68,26 @@ class MainActivity : AppCompatActivity() {
         val name = etName.text.toString()
         val location = etLocation.text.toString()
         val pk = 0
-        val api = Client().getClient()?.create(API::class.java)
 
-        api?.postData(dataItem(location, name,pk))?.enqueue(object : Callback<dataItem> {
-            override fun onResponse(call: Call<dataItem>, response: Response<dataItem>) {
-                getAllData()
-                etLocation.clearFocus()
-                etName.clearFocus()
-                etLocation.text.clear()
-                etName.text.clear()
-                Toast.makeText(applicationContext, "User added!", Toast.LENGTH_LONG).show()
-            }
+        if(name.isNotEmpty() && location.isNotEmpty() ) {
+            val api = Client().getClient()?.create(API::class.java)
 
-            override fun onFailure(call: Call<dataItem>, t: Throwable) {
-                Log.d("error", "$t")
-            }
-        })
+            api?.postData(dataItem(location, name, pk))?.enqueue(object : Callback<dataItem> {
+                override fun onResponse(call: Call<dataItem>, response: Response<dataItem>) {
+                    getAllData()
+                    etLocation.clearFocus()
+                    etName.clearFocus()
+                    etLocation.text.clear()
+                    etName.text.clear()
+                    Toast.makeText(applicationContext, "User added!", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFailure(call: Call<dataItem>, t: Throwable) {
+                    Log.d("error", "$t")
+                }
+            })
+        }else{
+            Toast.makeText(applicationContext, "please enter your name and location", Toast.LENGTH_LONG).show()
+        }
     }
 }
