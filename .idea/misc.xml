@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/activity_update_delete_data.xml" value="0.13677811550151975" />
         <entry key="app/src/main/res/layout/rv_row.xml" value="0.1503623188405797" />
       </map>
     </option>

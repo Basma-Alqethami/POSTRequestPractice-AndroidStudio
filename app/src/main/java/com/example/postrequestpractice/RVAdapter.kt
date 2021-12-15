@@ -1,5 +1,6 @@
 package com.example.postrequestpractice
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,13 @@ class RVAdapter (private var users: ArrayList<dataItem>): RecyclerView.Adapter<R
         holder.itemView.apply {
             rowName.text = user.name
             rowLocation.text = user.location
+
+            holder.itemView.setOnClickListener{
+                val userData = dataItem(users[position].location, users[position].name, users[position].pk)
+                val intent = Intent(holder.itemView.context,UpdateDeleteData::class.java)
+                intent.putExtra("displayData",userData)
+                holder.itemView.context.startActivity(intent)
+            }
         }
     }
 
